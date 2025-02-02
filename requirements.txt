@@ -4,4 +4,4 @@ django-ckeditor
 googletrans==4.0.0-rc1
 pytest
 pytest-django
-flake8
+

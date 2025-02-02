@@ -1,12 +1,9 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from googletrans import Translator
+from django.core.cache import cache
 
-LANGUAGE_CHOICES = [
-    ('en', 'English'),
-    ('hi', 'Hindi'),
-    ('bn', 'Bengali')
-]
+
 
 
 
@@ -26,8 +23,9 @@ class FAQ(models.Model):
    
     
     def save(self, *args, **kwargs):
-        # print(self.language)
-        short_forms = [lang[0] for lang in LANGUAGE_CHOICES].remove('en')
+    
+        short_forms = [lang[0] for lang in self.LANGUAGE_CHOICES if lang[0] != 'en']
+       
         if(self.language in short_forms):
             field_name= f"question_{self.language}"
             translator = Translator()
@@ -43,7 +41,12 @@ class FAQ(models.Model):
             self.language = 'en'
 
         super().save(*args, **kwargs)
-        return
+        self.update_cached_faqs()
+    
+    def update_cached_faqs(self):
+        cache_key = self.language
+        faqs = FAQ.objects.filter(language=cache_key) # Fetch fresh data
+        cache.set(cache_key, faqs)  # Cache for 1 hour
         
 
     def __str__(self):

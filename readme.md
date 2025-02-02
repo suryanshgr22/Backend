@@ -1,6 +1,6 @@
 # Backend for BharatFD
 
-This is the backend assignment solution of BharatFD, built using Django and Django Ninja for API development. It provides API endpoints for managing FAQs with multi-language support, caching, and efficient data retrieval.
+This is the solution for BharatFD's backend assignment for hiring, built using Django and Django Ninja for API development. It provides API endpoints for managing FAQs with multi-language support, caching, and efficient data retrieval.
 
 ## Features
 - **Django Ninja API**: Fast and easy API development.

@@ -37,10 +37,13 @@ Ensure you have the following installed:
 4. **Set up the database**
    Update `settings.py` with your database credentials and then run:
    ```sh
+   python manage.py makemigrations
+   ```
+   ```sh
    python manage.py migrate
    ```
 
-5. **Run the development server**
+6. **Run the development server**
    ```sh
    python manage.py runserver
    ```
